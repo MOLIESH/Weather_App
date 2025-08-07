@@ -65,7 +65,7 @@ def home(request):
     else:
         city = 'indore'     
 
-    weather_url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=914551a07e7241dd4c459d39dde5039e'
+    weather_url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=Enter your Openweatherapi id'
     PARAMS = {'units': 'metric'}
 
     API_KEY = ''  # 🔑 Make sure to add valid API keys
