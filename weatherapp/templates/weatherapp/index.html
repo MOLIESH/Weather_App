@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="{% static 'weather.js' %}"></script>
+</head>
+
+<body {% if exception_occurred %}
+    style="background-image: url('https://images.pexels.com/photos/3008509/pexels-photo-3008509.jpeg?auto=compress&cs=tinysrgb&w=1600');" 
+  {% else %}
+  style="background-image: url('{{ image_url }}');"
+  {% endif %}>
+  <div class="container">
+    <h1 class="heading">Weather App</h1>
+    
+    <form id="weather-form" autocomplete="off">
+      {% csrf_token %}
+      <input type="text" id="city-input" name="city" placeholder="Enter City" required>
+      <button type="submit" class="btn">Search</button>
+    </form>
+    <div class="weather" id="weather-info" style="display:none;">
+      <div class="left">
+        <h2 class="temp" id="temp"></h2>
+        <h2 class="city" id="city"></h2>
+      </div>
+      <div class="right">
+        <div class="icon" id="icon"></div>
+        <div class="condition" id="condition"></div>
+      </div>
+    </div>
+    <div id="error-message" style="color:red; text-align:center; margin-top:1em;"></div>
+  </div>
+
+
+{% if exception_occurred %}
+    <script>
+        window.onload = function() {
+            alert("City information is not available to Weather API");
+        }
+    </script>
+{% endif %}
+
+</body>
+</html>
